@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Carousel from './components/Carousel';
+import { questions } from './data/questions';
 
 function App() {
+  const [answers, setAnswers] = useState({});
+
+  const handleAnswer = (step, answer) => {
+    setAnswers(prevAnswers => ({ ...prevAnswers, [step]: answer }));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <Carousel
+        questions={questions}
+        answers={answers}
+        handleAnswer={handleAnswer}
+      />
     </div>
   );
 }
